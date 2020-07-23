@@ -57,5 +57,16 @@ for e in range(epochs):
     # TODO: Update weights
     weights_input_hidden += learnrate * del_w_input_hidden / n_records
     weights_hidden_output += learnrate * del_w_hidden_output / n_records
-   
 
+    # Printing out the mean square error on the training set
+    if e % (epochs / 10) == 0:
+        hidden_output = sigmoid(np.dot(x, weights_input_hidden))
+        out = sigmoid(np.dot(hidden_output,
+                             weights_hidden_output))
+        loss = np.mean((out - targets) ** 2)
+
+        if last_loss and last_loss < loss:
+            print("Train loss: ", loss, "  WARNING - Loss Increasing")
+        else:
+            print("Train loss: ", loss)
+        last_loss = loss
