@@ -54,5 +54,8 @@ for e in range(epochs):
         del_w_hidden_output += output_error_term * hidden_output
         del_w_input_hidden += hidden_error_term * x[:, None]
 
+    # TODO: Update weights
+    weights_input_hidden += learnrate * del_w_input_hidden / n_records
+    weights_hidden_output += learnrate * del_w_hidden_output / n_records
    
 
